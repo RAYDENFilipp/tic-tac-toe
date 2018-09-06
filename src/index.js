@@ -22,6 +22,12 @@ class Board extends Component {
         };
     }
 
+    handleClick(i) {
+        const squares = this.state.squares.slice();//creates a copy of an existing array
+        squares[i] = 'X';
+        this.setState({ squares: squares});
+    }
+
     renderSquare(i) {
         return (
             <Square
