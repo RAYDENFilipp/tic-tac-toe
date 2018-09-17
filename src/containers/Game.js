@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Board from '../components/Board';
 import calculateWinner from '../components/calculateWinner';
-
+import showColRow from "../components/showColRow";
 export default class Game extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +28,8 @@ export default class Game extends Component {
         this.setState({
             history: history.concat([
                 {
-                squares: squares
+                squares: squares,
+                currentLocation: showColRow(i)
                 }
             ]),
             stepNumber: history.length,
@@ -50,8 +51,8 @@ export default class Game extends Component {
 
 // For each move in the tic-tac-toes’s game’s history, we create a list item <li> which contains a button <button>. The button has a onClick handler which calls a method called this.jumpTo().
         const moves = history.map((step, move) => {
-            const desc = move ?
-                `Go to move #${move}` :
+            const desc = move && step.currentLocation ?
+                `Go to move #${move}, ${step.currentLocation}`:
                 `Go to the game start`;
             return(
                 <li key={move}>
