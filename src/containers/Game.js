@@ -54,9 +54,10 @@ export default class Game extends Component {
             const desc = move && step.currentLocation ?
                 `Go to move #${move}, ${step.currentLocation}`:
                 `Go to the game start`;
+                const boldButton = move === this.state.stepNumber ? 'bold-list-item' : '';
             return(
                 <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <button className={boldButton} onClick={() => this.jumpTo(move)}>{desc}</button>
                 </li>
             );
         });
