@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import Square from '../components/Square';
 
 export default class Board extends Component {
-    
+
     renderSquare(i) {
         return (
             <Square
+                key={i}
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)} />
         );
