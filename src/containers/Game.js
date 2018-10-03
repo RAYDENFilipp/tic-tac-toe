@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Board from '../components/Board';
 import calculateWinner from '../components/calculateWinner';
-import showColRow from "../components/showColRow";
+import showColRow from '../components/showColRow';
+import ToggleButton from '../components/ToggleButton';
 export default class Game extends Component {
     constructor(props) {
         super(props);
@@ -12,7 +13,8 @@ export default class Game extends Component {
                 }
             ],
             stepNumber: 0,
-            xIsNext: true//first move to be X by default
+            xIsNext: true,//first move to be X by default
+            toggleValue: 'Asc'
         };
     }
 
@@ -44,6 +46,20 @@ export default class Game extends Component {
         });
     }
 
+    toggleButton(array) {
+        if (this.state.toggleValue === 'Asc') {
+            this.setState({
+                toggleValue: 'Desc'
+                }
+            );
+        } else {
+            this.setState({
+                toggleValue: 'Asc'
+                }
+            );
+        }
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
@@ -61,7 +77,7 @@ export default class Game extends Component {
                 </li>
             );
         });
-        
+
         let status;
         if (winner) {
             status = `Winner: ${winner}`;
@@ -78,7 +94,19 @@ export default class Game extends Component {
                 </div>
                 <div className='game-info'>
                     <div>{status}</div>
-                    <ol>{moves}</ol>
+                    <ToggleButton
+                    value={this.state.toggleValue}
+                    onClick={() => {
+                        this.toggleButton();
+                        }
+                    }
+                    />
+                    <ol>
+                        {
+                        this.state.toggleValue === 'Asc' ?
+                        moves : moves.reverse()
+                        }
+                    </ol>
                 </div>
             </div>
         );
