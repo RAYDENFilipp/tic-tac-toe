@@ -3,23 +3,31 @@ import Square from '../components/Square';
 
 export default class Board extends Component {
 
-    renderSquare(i) {
+    renderSquare(i, cssClass) {
         return (
             <Square
                 key={i}
                 value={this.props.squares[i]}
-                onClick={() => this.props.onClick(i)} />
+                onClick={() => this.props.onClick(i)}
+                cssClass={cssClass}
+				/>
         );
     }
 
     renderBoard(row, col) {
         const board = [];
-        let cellCounter = 0;
+		// winner here is undefined, if we wanted a value we would need to do some destructuring
+        let winner,
+		    cellCounter = 0;
 
         for (let i = 0; i < row; i++) {
             const columns = [];
             for (let j = 0; j < col; j++) {
-                columns.push(this.renderSquare(cellCounter++));
+				// try to see if the counter is included in the array, catch if the winning coords
+				try {
+				    winner = this.props.winningCoordinates.includes(counter);
+				} catch (error) {}
+				columns.push(this.renderSquare(counter, winner ? "winner" : ""));
             }
             board.push(
                 <div key={i} className='board-row'>
