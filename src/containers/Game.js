@@ -82,6 +82,8 @@ export default class Game extends Component {
         let status;
         if (winner) {
             status = `Winner: ${winner}`;
+        } else if (!current.squares.includes(null)) {
+            status = "It's a draw";
         } else {
             status = `Next player: ${this.state.xIsNext ? "X" : "O"}`;
         }
