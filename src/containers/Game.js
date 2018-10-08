@@ -90,7 +90,8 @@ export default class Game extends Component {
                 <div className='game-board'>
                     <Board
                     squares={current.squares}
-                    onClick={i => this.handleClick(i)}
+                    onClick={i => this.handleClick(i)} // need to pass i, i will be defined in the Board
+					winningCoordinates={winnerCoords}
                     />
                 </div>
                 <div className='game-info'>
