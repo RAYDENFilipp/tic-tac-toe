@@ -23,7 +23,7 @@ export default class Game extends Component {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice(); //creates a copy of an existing array
-        if (calculateWinner(squares) || squares[i]) {
+        if (calculateWinner(squares)["winner"] || squares[i]) {
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
@@ -63,7 +63,7 @@ export default class Game extends Component {
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
-        const winner = calculateWinner(current.squares);
+        const { winner, winnerCoord } = calculateWinner(current.squares);
 
 // For each move in the tic-tac-toes’s game’s history, we create a list item <li> which contains a button <button>. The button has a onClick handler which calls a method called this.jumpTo().
         const moves = history.map((step, move) => {
@@ -81,6 +81,8 @@ export default class Game extends Component {
         let status;
         if (winner) {
             status = `Winner: ${winner}`;
+        } else if (!current.squares.includes(null)) {
+            status = 'This is a draw!';
         } else {
             status = `Next player: ${this.state.xIsNext ? "X" : "O"}`;
         }
@@ -90,6 +92,7 @@ export default class Game extends Component {
                     <Board
                     squares={current.squares}
                     onClick={i => this.handleClick(i)}
+                    winnerCoordinates={winnerCoord}
                     />
                 </div>
                 <div className='game-info'>
