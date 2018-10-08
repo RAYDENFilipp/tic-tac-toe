@@ -23,11 +23,14 @@ export default class Board extends Component {
         for (let i = 0; i < row; i++) {
             const columns = [];
             for (let j = 0; j < col; j++) {
-				// try to see if the counter is included in the array, catch if the winning coords
-				try {
-				    winner = this.props.winningCoordinates.includes(counter);
-				} catch (error) {}
-				columns.push(this.renderSquare(counter, winner ? "winner" : ""));
+                // try to see if the counter is included in the array, catch if the winning coords
+                try {
+                    winner = this.props.winnerCoordinates.includes(cellCounter);
+                } catch (error) {}
+
+                columns.push(
+                    this.renderSquare(cellCounter++, winner ? "winner" : "")
+                    );
             }
             board.push(
                 <div key={i} className='board-row'>

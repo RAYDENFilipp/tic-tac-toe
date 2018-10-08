@@ -53,6 +53,6 @@ ol, ul {
   font-weight: bold;
 }
 
-winner {
-  color: lime;
+.winner {
+  background-color: lime;
 }
